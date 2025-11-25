@@ -1,9 +1,14 @@
+
+
 name: Update DockerHub Allowed Repos
 
 on:
   workflow_dispatch: {}
   schedule:
     - cron: '0 0 1 * *'  # Run at 00:00 on the 1st of every month
+
+permissions:
+  contents: write
 
 jobs:
   update-allowed-repos:
