@@ -1,0 +1,16 @@
+# Example configuration for Docker Hub repository filtering
+# List repositories and filtering rules (regex supported)
+
+repositories:
+  - namespace: dataeditors
+    filters:
+      # Only keep repositories named stata15, stata16, stata17, stata18-mp, stata19-mp, etc.
+      - repo_regex: '^stata1[5-7]$|^stata1[8-9].*-mp$'
+      # Keep the 4 most recent tags (latest through latest-3) for each image
+      - keep_latest_n: 3
+  - namespace: rocker
+    filters:
+      # Only keep repositories named r-ver
+      - repo_regex: '^r-ver$|^tidyverse$|^verse$|^geospatial$'
+      # Only allow tags for three-level versions >= 4.2.0 (e.g., 4.2.0, 4.3.1, 4.4.3, 5.0.0, ...), not two-level (e.g., 4.5)
+      - tag_regex: '^(4\.[2-9]\.\d+|[5-9]\.\d+\.\d+|[1-9][0-9]\.\d+\.\d+)$'
