@@ -14,3 +14,9 @@ repositories:
       - repo_regex: '^r-ver$|^tidyverse$|^verse$|^geospatial$'
       # Only allow tags for three-level versions >= 4.2.0 (e.g., 4.2.0, 4.3.1, 4.4.3, 5.0.0, ...), not two-level (e.g., 4.5)
       - tag_regex: '^(4\.[2-9]\.\d+|[5-9]\.\d+\.\d+|[1-9][0-9]\.\d+\.\d+)$'
+  - namespace: dynare
+    filters:
+      # Only keep repositories named dynare
+      - repo_regex: '^dynare$'
+      # Only allow tags for Dynare version + MATLAB version (e.g., 5.0-R2022a, 5.1-R2023a, etc.)
+      - tag_regex: '^[4-6]\.\d+-R\d{4}[a-b]$'

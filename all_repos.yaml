@@ -38,6 +38,8 @@ dataeditors:
 - stata19_5-be-i
 - stata19_5-be
 - stata19_5-base
+dynare:
+- dynare
 rocker:
 - r-base
 - r-devel
