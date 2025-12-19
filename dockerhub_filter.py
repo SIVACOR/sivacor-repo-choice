@@ -75,22 +75,27 @@ def natural_key(s):
 def filter_tags(tags, filters):
     filtered = tags
     for rule in filters:
+        # Only one of tag-related filters per rule dict
         if 'tag_regex' in rule:
-            regex = re.compile(rule['tag_regex'])
-            filtered = [t for t in filtered if regex.match(t['name'])]
-        if rule.get('keep_most_recent'):
+            regex = re.compile(rule['tag_regex']) if rule['tag_regex'] else None
+            if regex:
+                filtered = [t for t in filtered if regex.match(t['name'])]
+            # Blacklist
+            if 'blacklist' in rule:
+                blacklist = set(rule['blacklist'])
+                filtered = [t for t in filtered if t['name'] not in blacklist]
+            # keep_latest_n
+            if 'keep_latest_n' in rule:
+                n = rule['keep_latest_n']
+                def tag_sort_key(t):
+                    if t['name'] == 'latest':
+                        return (0, )
+                    return (1, [(-x if isinstance(x, int) else x) for x in natural_key(t['name'])])
+                filtered = sorted(filtered, key=tag_sort_key)
+                filtered = filtered[:n]
+        elif rule.get('keep_most_recent'):
             if filtered:
                 filtered = [max(filtered, key=lambda t: t['last_updated'])]
-        if 'keep_latest_n' in rule:
-            n = rule['keep_latest_n']
-            # Sort tags by tag name in descending natural order, with 'latest' always first if present
-            def tag_sort_key(t):
-                if t['name'] == 'latest':
-                    return (0, )
-                # For descending order, use negative of natural key (tuples are compared elementwise)
-                return (1, [(-x if isinstance(x, int) else x) for x in natural_key(t['name'])])
-            filtered = sorted(filtered, key=tag_sort_key)
-            filtered = filtered[:n]
     return filtered
 
 
