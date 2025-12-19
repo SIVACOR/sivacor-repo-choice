@@ -7,7 +7,7 @@ repositories:
       # Only keep repositories named stata15, stata16, stata17, stata18-mp, stata19-mp, etc.
       - repo_regex: '^stata1[5-7]$|^stata1[8-9].*-mp$'
       # Keep the 4 most recent tags (latest through latest-3) for each image
-      - keep_latest_n: 3
+      - keep_latest_n: 4
   - namespace: rocker
     filters:
       # Only keep repositories named r-ver
