@@ -1,22 +1,53 @@
-# Example configuration for Docker Hub repository filtering
+# Configuration for Docker Hub repository filtering
 # List repositories and filtering rules (regex supported)
+# A namespace can be repeated to apply different filters
+
+software:
+  - name: Stata (older)
+    description: Older versions of Stata software
+    sort_order: 10
+  - name: Stata
+    description: Current versions of Stata software
+    sort_order: 1
+  - name: R
+    description: R programming language images
+    sort_order: 2
+  - name: MATLAB
+    description: MATLAB software images
+    sort_order: 3
+  - name: Dynare
+    description: Dynare software images
+    sort_order: 4
 
 repositories:
   - namespace: dataeditors
+    software:
+      - Stata (older)
     filters:
-      - repo_regex: '^stata1[5-7]$|^stata1[8-9].*-mp$'
-      - tag_regex: ''
+      - repo_regex: '^stata1[5-7]$'
+      - tag_regex: '^\d{4}-\d{2}-\d{2}$'
+        keep_latest_n: 1
+  - namespace: dataeditors
+    software:
+      - Stata
+    filters:
+      - repo_regex: '^stata1[8-9].*-mp$'
+      - tag_regex: '^\d{4}-\d{2}-\d{2}$'
         blacklist:
-          - '2025-11-12'
           - '2025-08-14'
         keep_latest_n: 4
   - namespace: rocker
+    software:
+      - R
     filters:
       - repo_regex: '^r-ver$|^tidyverse$|^verse$|^geospatial$'
       - tag_regex: '^(4\.[2-9]\.\d+|[5-9]\.\d+\.\d+|[1-9][0-9]\.\d+\.\d+)$'
         blacklist:
           - 'devel'
   - namespace: dynare
+    software:
+      - MATLAB
+      - Dynare
     filters:
       - repo_regex: '^dynare$'
       - tag_regex: '^[4-6]\.\d+-R\d{4}[a-b]$'

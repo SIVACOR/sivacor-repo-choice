@@ -1,0 +1,118 @@
+Stata:
+  description: Current versions of Stata software
+  repos:
+    dataeditors/stata18-mp:
+    - '2025-11-12'
+    - '2025-08-12'
+    - '2025-02-26'
+    - '2024-12-18'
+    dataeditors/stata18_5-mp:
+    - '2025-02-26'
+    - '2024-12-18'
+    - '2024-10-16'
+    - '2024-09-04'
+    dataeditors/stata19_5-mp:
+    - '2025-11-12'
+    - '2025-08-13'
+    - '2025-05-21'
+    - '2025-04-16'
+R:
+  description: R programming language images
+  repos:
+    rocker/r-ver:
+    - 4.5.2
+    - 4.5.1
+    - 4.5.0
+    - 4.4.3
+    - 4.4.2
+    - 4.4.1
+    - 4.4.0
+    - 4.3.3
+    - 4.3.2
+    - 4.3.1
+    - 4.3.0
+    - 4.2.3
+    - 4.2.2
+    - 4.2.1
+    - 4.2.0
+    rocker/tidyverse:
+    - 4.5.2
+    - 4.5.1
+    - 4.5.0
+    - 4.4.3
+    - 4.4.2
+    - 4.4.1
+    - 4.4.0
+    - 4.3.3
+    - 4.3.2
+    - 4.3.1
+    - 4.3.0
+    - 4.2.3
+    - 4.2.2
+    - 4.2.1
+    - 4.2.0
+    rocker/verse:
+    - 4.5.2
+    - 4.5.1
+    - 4.5.0
+    - 4.4.3
+    - 4.4.2
+    - 4.4.1
+    - 4.4.0
+    - 4.3.3
+    - 4.3.2
+    - 4.3.1
+    - 4.3.0
+    - 4.2.3
+    - 4.2.2
+    - 4.2.1
+    - 4.2.0
+    rocker/geospatial:
+    - 4.5.2
+    - 4.5.1
+    - 4.5.0
+    - 4.4.3
+    - 4.4.2
+    - 4.4.1
+    - 4.4.0
+    - 4.3.3
+    - 4.3.2
+    - 4.3.1
+    - 4.3.0
+    - 4.2.3
+    - 4.2.2
+    - 4.2.1
+    - 4.2.0
+MATLAB:
+  description: MATLAB software images
+  repos:
+    dynare/dynare:
+    - 6.1-R2024a
+    - 6.1-R2023b
+    - 6.1-R2023a
+    - 6.0-R2023b
+    - 6.0-R2023a
+    - 5.5-R2023b
+    - 5.5-R2023a
+    - 5.0-R2021b
+Dynare:
+  description: Dynare software images
+  repos:
+    dynare/dynare:
+    - 6.1-R2024a
+    - 6.1-R2023b
+    - 6.1-R2023a
+    - 6.0-R2023b
+    - 6.0-R2023a
+    - 5.5-R2023b
+    - 5.5-R2023a
+    - 5.0-R2021b
+Stata (older):
+  description: Older versions of Stata software
+  repos:
+    dataeditors/stata17:
+    - '2024-05-21'
+    dataeditors/stata16:
+    - '2023-06-13'
+    dataeditors/stata15:
+    - '2023-01-27'

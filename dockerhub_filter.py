@@ -1,4 +1,3 @@
-
 """
 dockerhub_filter.py
 
@@ -98,17 +97,25 @@ def filter_tags(tags, filters):
                 filtered = [max(filtered, key=lambda t: t['last_updated'])]
     return filtered
 
-
-    config = load_config(config_path)
-
 def main(config_path, allowed_output_path, all_repos_output_path):
     config = load_config(config_path)
     output = defaultdict(list)
     all_repos_output = defaultdict(list)
+    import copy
+    software_output = defaultdict(lambda: defaultdict(list))
+    software_list = config.get('software', [])
+    software_meta = {s['name']: s for s in software_list}
+    software_sortorder = {k: v.get('sort_order', 999) for k, v in software_meta.items()}
+    software_desc = {k: v.get('description', '') for k, v in software_meta.items()}
+    unknown_software = set()
     for repo_conf in config['repositories']:
         namespace = repo_conf['namespace']
         repo_filters = [f for f in repo_conf.get('filters', []) if 'repo_regex' in f]
         tag_filters = [f for f in repo_conf.get('filters', []) if 'tag_regex' in f or f.get('keep_most_recent') or 'keep_latest_n' in f]
+        software_list = repo_conf.get('software', [])
+        for software in software_list:
+            if software not in software_meta:
+                unknown_software.add(software)
 
         # Get all repositories in the namespace
         all_repos = fetch_all_repositories(namespace)
@@ -122,13 +129,49 @@ def main(config_path, allowed_output_path, all_repos_output_path):
             # Sort tag names in descending natural order before output
             tag_names = [t['name'] for t in filtered_tags]
             tag_names_sorted = sorted(tag_names, key=natural_key, reverse=True)
-            output[f"{namespace}/{repository}"] = tag_names_sorted
+            repo_key = f"{namespace}/{repository}"
+            output[repo_key] = tag_names_sorted
+            for software in software_list:
+                software_output[software][repo_key] = copy.deepcopy(tag_names_sorted)
 
+    repo_sortorder = {}
+    for repo_key in output:
+        found = False
+        for repo_conf in config['repositories']:
+            namespace = repo_conf['namespace']
+            software_list = repo_conf.get('software', [])
+            for software in software_list:
+                sorder = software_sortorder.get(software, 999)
+                if repo_key.startswith(namespace):
+                    if repo_key not in repo_sortorder or sorder < repo_sortorder[repo_key]:
+                        repo_sortorder[repo_key] = sorder
+                    found = True
+            if found:
+                break
+        if not found:
+            repo_sortorder[repo_key] = 999
+    sorted_repos = sorted(output.keys(), key=lambda r: repo_sortorder.get(r, 999))
+    allowed_sorted = {k: output[k] for k in sorted_repos}
     with open(allowed_output_path, 'w', encoding='utf-8') as f:
-        yaml.dump(dict(output), f)
+        yaml.dump(allowed_sorted, f)
 
     with open(all_repos_output_path, 'w', encoding='utf-8') as f:
         yaml.dump(dict(all_repos_output), f)
+
+    sorted_software = sorted(software_output.keys(), key=lambda s: software_sortorder.get(s, 999))
+    allowed_by_software = {}
+    for k in sorted_software:
+        allowed_by_software[k] = {
+            'description': software_desc.get(k, ''),
+            'repos': dict(software_output[k])
+        }
+    with open('allowed_repos_by_software.yaml', 'w', encoding='utf-8') as f:
+        yaml.safe_dump(allowed_by_software, f, default_flow_style=False, sort_keys=False)
+
+    if unknown_software:
+        for s in unknown_software:
+            print(f"[ERROR] Software '{s}' is referenced in a repository but not defined in the 'software' section of the config.")
+            print(f"Suggested template to add to your YAML config:\\n  {s}:\\n    sortorder: <number>\\n    description: '<description>'\\n")
 
 
 def parse_args():
