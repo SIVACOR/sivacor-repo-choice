@@ -8,6 +8,7 @@ repositories:
       - tag_regex: ''
         blacklist:
           - '2025-11-12'
+          - '2025-08-14'
         keep_latest_n: 4
   - namespace: rocker
     filters:
