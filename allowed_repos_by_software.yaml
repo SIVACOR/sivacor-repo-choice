@@ -94,7 +94,6 @@ MATLAB:
     - 6.0-R2023a
     - 5.5-R2023b
     - 5.5-R2023a
-    - 5.0-R2021b
 Dynare:
   description: Dynare software images
   repos:
@@ -106,7 +105,6 @@ Dynare:
     - 6.0-R2023a
     - 5.5-R2023b
     - 5.5-R2023a
-    - 5.0-R2021b
 Stata (older):
   description: Older versions of Stata software
   repos:

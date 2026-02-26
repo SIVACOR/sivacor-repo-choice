@@ -27,7 +27,6 @@ dynare/dynare:
 - 6.0-R2023a
 - 5.5-R2023b
 - 5.5-R2023a
-- 5.0-R2021b
 rocker/geospatial:
 - 4.5.2
 - 4.5.1
