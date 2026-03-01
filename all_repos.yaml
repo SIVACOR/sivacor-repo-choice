@@ -38,6 +38,9 @@ dataeditors:
 - stata19_5-be-i
 - stata19_5-be
 - stata19_5-base
+- stata19_5-mp-i-python
+- stata19_5-se-i-python
+- stata19_5-be-i-python
 dynare:
 - dynare
 rocker:
