@@ -6,6 +6,10 @@ on:
   workflow_dispatch: {}
   schedule:
     - cron: '0 0 1 * *'  # Run at 00:00 on the 1st of every month
+  push:
+    paths:
+      - 'dockerhub_filter_config.yaml'
+      - 'dockerhub_filter.py'
 
 permissions:
   contents: write
