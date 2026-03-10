@@ -9,6 +9,9 @@ software:
   - name: Stata
     description: Current versions of Stata software
     sort_order: 1
+  - name: Stata w Python
+    description: Recent versions of Stata software with Python
+    sort_order: 1
   - name: R
     description: R programming language images
     sort_order: 2
@@ -35,6 +38,13 @@ repositories:
       - tag_regex: '^\d{4}-\d{2}-\d{2}$'
         blacklist:
           - '2025-08-14'
+        keep_latest_n: 4
+  - namespace: dataeditors
+    software:
+      - Stata w Python
+    filters:
+      - repo_regex: '^stata1[8-9].*-python$'
+      - tag_regex: '^\d{4}-\d{2}-\d{2}$'
         keep_latest_n: 4
   - namespace: rocker
     software:
