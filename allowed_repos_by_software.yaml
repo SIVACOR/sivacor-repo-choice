@@ -16,15 +16,6 @@ Stata:
     - '2026-01-14'
     - '2025-11-12'
     - '2025-08-13'
-Stata w Python:
-  description: Recent versions of Stata software with Python
-  repos:
-    dataeditors/stata19_5-mp-i-python:
-    - '2026-02-18'
-    dataeditors/stata19_5-se-i-python:
-    - '2026-02-18'
-    dataeditors/stata19_5-be-i-python:
-    - '2026-02-18'
 R:
   description: R programming language images
   repos:
@@ -92,6 +83,11 @@ R:
     - 4.2.2
     - 4.2.1
     - 4.2.0
+Stata w Python:
+  description: Recent versions of Stata software with Python
+  repos:
+    dataeditors/stata19_5-mp-i-python:
+    - '2026-02-18'
 MATLAB:
   description: MATLAB software images
   repos:

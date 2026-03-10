@@ -12,16 +12,16 @@ software:
     sort_order: 1
   - name: Stata w Python
     description: Recent versions of Stata software with Python
-    sort_order: 1
+    sort_order: 3
   - name: R
     description: R programming language images
     sort_order: 2
   - name: MATLAB
     description: MATLAB software images
-    sort_order: 3
+    sort_order: 4
   - name: Dynare
     description: Dynare software images
-    sort_order: 4
+    sort_order: 5
 
 repositories:
   - namespace: dataeditors
@@ -44,7 +44,7 @@ repositories:
     software:
       - Stata w Python
     filters:
-      - repo_regex: '^stata1[8-9].*-python$'
+      - repo_regex: '^stata1[8-9].*mp-i-python$'
       - tag_regex: '^\d{4}-\d{2}-\d{2}$'
         keep_latest_n: 4
   - namespace: rocker

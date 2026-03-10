@@ -14,16 +14,12 @@ dataeditors/stata18_5-mp:
 - '2024-12-18'
 - '2024-10-16'
 - '2024-09-04'
-dataeditors/stata19_5-be-i-python:
-- '2026-02-18'
 dataeditors/stata19_5-mp:
 - '2026-02-18'
 - '2026-01-14'
 - '2025-11-12'
 - '2025-08-13'
 dataeditors/stata19_5-mp-i-python:
-- '2026-02-18'
-dataeditors/stata19_5-se-i-python:
 - '2026-02-18'
 dynare/dynare:
 - 6.1-R2024a
