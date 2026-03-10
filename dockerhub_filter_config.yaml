@@ -1,6 +1,7 @@
 # Configuration for Docker Hub repository filtering
 # List repositories and filtering rules (regex supported)
 # A namespace can be repeated to apply different filters
+# Version: 2026-03-09
 
 software:
   - name: Stata (older)
