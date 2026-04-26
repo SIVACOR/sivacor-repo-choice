@@ -16,10 +16,13 @@ Stata:
     - '2026-01-14'
     - '2025-11-12'
     - '2025-08-13'
+    dataeditors/stata19-mp:
+    - '2026-02-18'
 R:
   description: R programming language images
   repos:
     rocker/r-ver:
+    - 4.6.0
     - 4.5.3
     - 4.5.2
     - 4.5.1
@@ -94,6 +97,8 @@ Stata w Python:
     - '2026-02-18'
     dataeditors/stata18-mp-i-python:
     - '2026-02-17'
+    dataeditors/stata19-mp-i-python:
+    - '2026-02-18'
 MATLAB:
   description: MATLAB software images
   repos:

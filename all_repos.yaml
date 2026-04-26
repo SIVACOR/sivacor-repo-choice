@@ -44,6 +44,19 @@ dataeditors:
 - stata18-mp-i-python
 - stata18-se-i-python
 - stata18-be-i-python
+- stata19-mp-i-python
+- stata19-mp-x
+- stata19-mp-i
+- stata19-mp
+- stata19-se-i-python
+- stata19-se-x
+- stata19-se-i
+- stata19-se
+- stata19-be-i-python
+- stata19-be-x
+- stata19-be-i
+- stata19-be
+- stata19-base
 dynare:
 - dynare
 rocker:
