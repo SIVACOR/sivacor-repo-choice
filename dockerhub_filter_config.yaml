@@ -38,6 +38,7 @@ repositories:
       - repo_regex: '^stata1[8-9].*-mp$'
       - tag_regex: '^\d{4}-\d{2}-\d{2}$'
         blacklist:
+        # This build had issues
           - '2025-08-14'
         keep_latest_n: 4
   - namespace: dataeditors
@@ -63,4 +64,5 @@ repositories:
       - repo_regex: '^dynare$'
       - tag_regex: '^[4-6]\.\d+-R\d{4}[a-b]$'
         blacklist:
+        # License was not working for this one
           - '6.5-R2025b'
