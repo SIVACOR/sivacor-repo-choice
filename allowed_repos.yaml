@@ -5,11 +5,12 @@ dataeditors/stata16:
 dataeditors/stata17:
 - '2024-05-21'
 dataeditors/stata18-mp:
+- '2026-04-14'
 - '2026-02-17'
 - '2026-01-13'
 - '2025-11-12'
-- '2025-08-12'
 dataeditors/stata18-mp-i-python:
+- '2026-04-14'
 - '2026-02-17'
 dataeditors/stata18_5-mp:
 - '2025-02-26'
@@ -40,6 +41,7 @@ dynare/dynare:
 - 5.5-R2023a
 - 5.0-R2021b
 rocker/geospatial:
+- 4.6.0
 - 4.5.3
 - 4.5.2
 - 4.5.1
@@ -75,6 +77,7 @@ rocker/r-ver:
 - 4.2.1
 - 4.2.0
 rocker/tidyverse:
+- 4.6.0
 - 4.5.3
 - 4.5.2
 - 4.5.1
@@ -92,6 +95,7 @@ rocker/tidyverse:
 - 4.2.1
 - 4.2.0
 rocker/verse:
+- 4.6.0
 - 4.5.3
 - 4.5.2
 - 4.5.1
