@@ -41,6 +41,7 @@ dynare/dynare:
 - 5.5-R2023a
 - 5.0-R2021b
 rocker/geospatial:
+- 4.6.1
 - 4.6.0
 - 4.5.3
 - 4.5.2
@@ -59,6 +60,7 @@ rocker/geospatial:
 - 4.2.1
 - 4.2.0
 rocker/r-ver:
+- 4.6.1
 - 4.6.0
 - 4.5.3
 - 4.5.2
@@ -77,6 +79,7 @@ rocker/r-ver:
 - 4.2.1
 - 4.2.0
 rocker/tidyverse:
+- 4.6.1
 - 4.6.0
 - 4.5.3
 - 4.5.2
@@ -95,6 +98,7 @@ rocker/tidyverse:
 - 4.2.1
 - 4.2.0
 rocker/verse:
+- 4.6.1
 - 4.6.0
 - 4.5.3
 - 4.5.2
