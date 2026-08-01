@@ -2,21 +2,22 @@ Stata:
   description: Current versions of Stata software
   repos:
     dataeditors/stata18-mp:
+    - '2026-06-02'
     - '2026-04-14'
     - '2026-02-17'
     - '2026-01-13'
-    - '2025-11-12'
     dataeditors/stata18_5-mp:
     - '2025-02-26'
     - '2024-12-18'
     - '2024-10-16'
     - '2024-09-04'
     dataeditors/stata19_5-mp:
+    - '2026-06-03'
     - '2026-04-15'
     - '2026-02-18'
     - '2026-01-14'
-    - '2025-11-12'
     dataeditors/stata19-mp:
+    - '2026-06-03'
     - '2026-04-15'
     - '2026-02-18'
 R:
@@ -102,12 +103,15 @@ Stata w Python:
   description: Recent versions of Stata software with Python
   repos:
     dataeditors/stata19_5-mp-i-python:
+    - '2026-06-03'
     - '2026-04-15'
     - '2026-02-18'
     dataeditors/stata18-mp-i-python:
+    - '2026-06-02'
     - '2026-04-14'
     - '2026-02-17'
     dataeditors/stata19-mp-i-python:
+    - '2026-06-03'
     - '2026-04-15'
     - '2026-02-18'
 MATLAB:
