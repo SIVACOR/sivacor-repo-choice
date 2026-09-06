@@ -118,6 +118,7 @@ MATLAB:
   description: MATLAB software images
   repos:
     dynare/dynare:
+    - 6.5-R2025b
     - 6.1-R2024a
     - 6.1-R2023b
     - 6.1-R2023a
@@ -130,6 +131,7 @@ Dynare:
   description: Dynare software images
   repos:
     dynare/dynare:
+    - 6.5-R2025b
     - 6.1-R2024a
     - 6.1-R2023b
     - 6.1-R2023a
