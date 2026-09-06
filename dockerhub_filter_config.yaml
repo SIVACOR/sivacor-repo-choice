@@ -63,6 +63,3 @@ repositories:
     filters:
       - repo_regex: '^dynare$'
       - tag_regex: '^[4-6]\.\d+-R\d{4}[a-b]$'
-        blacklist:
-        # License was not working for this one
-          - '6.5-R2025b'
