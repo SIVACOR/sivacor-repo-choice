@@ -36,11 +36,28 @@ jobs:
           python dockerhub_filter.py dockerhub_filter_config.yaml
 
       - name: Commit and push changes
+        id: commit
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add allowed_repos.yaml all_repos.yaml allowed_repos_by_software.yaml
-          git diff --cached --quiet || git commit -m 'Update allowed and all DockerHub repo lists [auto]'
-          git push
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m 'Update allowed and all DockerHub repo lists [auto]'
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Only allowed_repos*.yaml changes should move the documentation, which
+      # embeds these lists; all_repos.yaml is informational and doesn't.
+      - name: Trigger documentation rebuild
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.DOCS_DISPATCH_TOKEN }}
+        run: |
+          if git diff --name-only HEAD~1 HEAD -- allowed_repos.yaml allowed_repos_by_software.yaml | grep -q .; then
+            gh workflow run deploy.yml --repo SIVACOR/documentation --ref main
+          fi
