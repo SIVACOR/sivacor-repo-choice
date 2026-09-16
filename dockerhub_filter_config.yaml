@@ -22,6 +22,9 @@ software:
   - name: Dynare
     description: Dynare software images
     sort_order: 5
+  - name: Julia
+    description: Julia programming language images
+    sort_order: 6
 
 repositories:
   - namespace: dataeditors
@@ -63,3 +66,25 @@ repositories:
     filters:
       - repo_regex: '^dynare$'
       - tag_regex: '^[4-6]\.\d+-R\d{4}[a-b]$'
+  - namespace: sivacor
+    # GitHub Container Registry, not Docker Hub. SIVACOR builds these itself
+    # (https://github.com/SIVACOR/julia) because the official Julia image ships
+    # no package registry and no non-root user.
+    registry: ghcr.io
+    # The OCI API cannot list a namespace's repositories, so they are named
+    # here. One per Julia release line: a single repository holding every line
+    # would put keep_latest_n's ungrouped truncation to work against us, keeping
+    # only the newest-versioned tags and silently dropping 1.10 and 1.11.
+    repositories:
+      - julia1.10
+      - julia1.11
+      - julia1.13
+    software:
+      - Julia
+    filters:
+      # <julia version>-<build date UTC>, with a suffix if a line is rebuilt
+      # twice in one day. A tag is never overwritten, so a TRO citing one keeps
+      # resolving; ageing out of keep_latest_n stops a tag being *offered*, not
+      # from existing.
+      - tag_regex: '^\d+\.\d+\.\d+-\d{8}(\.\d+)?$'
+        keep_latest_n: 4

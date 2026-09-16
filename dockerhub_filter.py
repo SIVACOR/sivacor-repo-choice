@@ -26,6 +26,13 @@ from collections import defaultdict
 DOCKER_HUB_TAGS_API = "https://hub.docker.com/v2/namespaces/{namespace}/repositories/{repository}/tags?page_size=100"
 DOCKER_HUB_REPOS_API = "https://hub.docker.com/v2/namespaces/{namespace}/repositories?page_size=100"
 
+# GitHub Container Registry speaks the OCI distribution API rather than Docker
+# Hub's, so it needs its own two calls. SIVACOR builds and publishes its own
+# Julia images there; every other image in this config is somebody else's, on
+# Docker Hub.
+GHCR_TOKEN_API = "https://ghcr.io/token?scope=repository:{repo}:pull&service=ghcr.io"
+GHCR_TAGS_API = "https://ghcr.io/v2/{repo}/tags/list"
+
 
 def load_config(config_path):
     with open(config_path, 'r', encoding='utf-8') as f:
@@ -43,6 +50,38 @@ def fetch_all_repositories(namespace):
         repos.extend(data.get('results', []))
         url = data.get('next')
     return repos
+
+def fetch_all_tags_ghcr(namespace, repository):
+    """Tags for one GHCR repository, via the OCI distribution API.
+
+    The token call needs no credentials **while the package is public**. A
+    private package is indistinguishable from a missing one from out here --
+    both refuse the token -- so if this starts returning nothing for a package
+    that certainly has tags, check its visibility before believing it.
+
+    Returns dicts rather than strings so the shared ``filter_tags`` works
+    unchanged. They carry only ``name``: the OCI listing has no timestamps, so
+    a ``keep_most_recent`` filter cannot be used against this source. Ordering
+    filters that key off the tag itself -- ``tag_regex``, ``keep_latest_n`` --
+    work exactly as they do for Docker Hub.
+    """
+    repo = f"{namespace}/{repository}"
+    token_resp = requests.get(GHCR_TOKEN_API.format(repo=repo), timeout=10)
+    token_resp.raise_for_status()
+    headers = {'Authorization': f"Bearer {token_resp.json()['token']}"}
+
+    tags = []
+    url = GHCR_TAGS_API.format(repo=repo)
+    while url:
+        resp = requests.get(url, headers=headers, timeout=10)
+        resp.raise_for_status()
+        tags.extend(resp.json().get('tags') or [])
+        # OCI paginates with a Link header, not a `next` field in the body.
+        url = resp.links.get('next', {}).get('url')
+        if url and url.startswith('/'):
+            url = f"https://ghcr.io{url}"
+    return [{'name': name} for name in tags]
+
 
 def fetch_all_tags(namespace, repository):
     tags = []
@@ -117,19 +156,40 @@ def main(config_path, allowed_output_path, all_repos_output_path):
             if software not in software_meta:
                 unknown_software.add(software)
 
-        # Get all repositories in the namespace
-        all_repos = fetch_all_repositories(namespace)
-        repo_names = [r['name'] for r in all_repos]
-        all_repos_output[namespace] = repo_names
+        # Which registry this namespace lives on. Absent means Docker Hub, so
+        # every pre-existing entry keeps working untouched.
+        registry = repo_conf.get('registry')
+        if registry is None:
+            # Get all repositories in the namespace
+            all_repos = fetch_all_repositories(namespace)
+            repo_names = [r['name'] for r in all_repos]
+            fetch_tags = fetch_all_tags
+            key_prefix = namespace
+        elif registry == 'ghcr.io':
+            # The OCI API has no "list the repositories in a namespace" call, so
+            # they are named in the config instead. That is no loss here: these
+            # are our own images and we know what we publish.
+            repo_names = list(repo_conf.get('repositories') or [])
+            if not repo_names:
+                raise ValueError(
+                    f"registry {registry} needs an explicit `repositories:` list "
+                    f"for namespace {namespace}; it cannot be discovered"
+                )
+            fetch_tags = fetch_all_tags_ghcr
+            key_prefix = f"{registry}/{namespace}"
+        else:
+            raise ValueError(f"unknown registry {registry!r} for namespace {namespace}")
+
+        all_repos_output[key_prefix] = repo_names
         filtered_repo_names = filter_names(repo_names, repo_filters) if repo_filters else repo_names
 
         for repository in filtered_repo_names:
-            tags = fetch_all_tags(namespace, repository)
+            tags = fetch_tags(namespace, repository)
             filtered_tags = filter_tags(tags, tag_filters) if tag_filters else tags
             # Sort tag names in descending natural order before output
             tag_names = [t['name'] for t in filtered_tags]
             tag_names_sorted = sorted(tag_names, key=natural_key, reverse=True)
-            repo_key = f"{namespace}/{repository}"
+            repo_key = f"{key_prefix}/{repository}"
             output[repo_key] = tag_names_sorted
             for software in software_list:
                 software_output[software][repo_key] = copy.deepcopy(tag_names_sorted)
@@ -139,10 +199,16 @@ def main(config_path, allowed_output_path, all_repos_output_path):
         found = False
         for repo_conf in config['repositories']:
             namespace = repo_conf['namespace']
+            # Must match how repo_key was built above: a registry-qualified key
+            # starts with the host, not the namespace, so comparing against the
+            # bare namespace would drop every GHCR repo to the default sort
+            # order without failing.
+            registry = repo_conf.get('registry')
+            key_prefix = namespace if registry is None else f"{registry}/{namespace}"
             software_list = repo_conf.get('software', [])
             for software in software_list:
                 sorder = software_sortorder.get(software, 999)
-                if repo_key.startswith(namespace):
+                if repo_key.startswith(key_prefix):
                     if repo_key not in repo_sortorder or sorder < repo_sortorder[repo_key]:
                         repo_sortorder[repo_key] = sorder
                     found = True

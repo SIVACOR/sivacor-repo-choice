@@ -59,6 +59,10 @@ dataeditors:
 - stata19-base
 dynare:
 - dynare
+ghcr.io/sivacor:
+- julia1.10
+- julia1.11
+- julia1.13
 rocker:
 - r-base
 - r-devel
