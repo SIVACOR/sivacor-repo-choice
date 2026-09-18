@@ -5,11 +5,12 @@ dataeditors/stata16:
 dataeditors/stata17:
 - '2024-05-21'
 dataeditors/stata18-mp:
+- '2026-07-28'
 - '2026-06-02'
 - '2026-04-14'
 - '2026-02-17'
-- '2026-01-13'
 dataeditors/stata18-mp-i-python:
+- '2026-07-28'
 - '2026-06-02'
 - '2026-04-14'
 - '2026-02-17'
@@ -19,19 +20,22 @@ dataeditors/stata18_5-mp:
 - '2024-10-16'
 - '2024-09-04'
 dataeditors/stata19-mp:
+- '2026-08-12'
 - '2026-06-03'
 - '2026-04-15'
 - '2026-02-18'
 dataeditors/stata19-mp-i-python:
+- '2026-08-12'
 - '2026-06-03'
 - '2026-04-15'
 - '2026-02-18'
 dataeditors/stata19_5-mp:
+- '2026-08-12'
 - '2026-06-03'
 - '2026-04-15'
 - '2026-02-18'
-- '2026-01-14'
 dataeditors/stata19_5-mp-i-python:
+- '2026-08-12'
 - '2026-06-03'
 - '2026-04-15'
 - '2026-02-18'
@@ -45,6 +49,12 @@ dynare/dynare:
 - 5.5-R2023b
 - 5.5-R2023a
 - 5.0-R2021b
+ghcr.io/sivacor/julia1.10:
+- 1.10.12-20260916
+ghcr.io/sivacor/julia1.11:
+- 1.11.9-20260916
+ghcr.io/sivacor/julia1.13:
+- 1.13.0-20260916
 rocker/geospatial:
 - 4.6.1
 - 4.6.0
