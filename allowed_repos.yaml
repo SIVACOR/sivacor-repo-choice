@@ -50,10 +50,14 @@ dynare/dynare:
 - 5.5-R2023a
 - 5.0-R2021b
 ghcr.io/sivacor/julia1.10:
+- 1.10.12-20260919
 - 1.10.12-20260916
 ghcr.io/sivacor/julia1.11:
+- 1.11.9-20260919
 - 1.11.9-20260916
 ghcr.io/sivacor/julia1.13:
+- 1.13.1-20260929
+- 1.13.0-20260919
 - 1.13.0-20260916
 rocker/geospatial:
 - 4.6.1
