@@ -1,4 +1,50 @@
-dataeditors:
+dynare:
+- dynare
+ghcr.io/sivacor:
+- julia1.10
+- julia1.11
+- julia1.13
+rocker:
+- r-base
+- r-devel
+- rstudio
+- ropensci
+- r-devel-san
+- drd
+- r-devel-ubsan-clang
+- shiny
+- r-apt
+- r-ver
+- tidyverse
+- verse
+- rstudio-stable
+- geospatial
+- binder
+- ml
+- drp
+- shiny-verse
+- r-rmd
+- cuda
+- tensorflow
+- tensorflow-gpu
+- ml-gpu
+- cuda-dev
+- gdal
+- r-parallel
+- r-ubuntu
+- ml-verse
+- r-rspm
+- r-bspm
+- r-edge
+- ci-4.0
+- vscode
+- r2u
+- r-basse
+- ml-spatial
+- rapids
+- cuda-spatial
+- r2u4ci
+sscng:
 - stata17
 - stata16
 - stata14
@@ -57,49 +103,3 @@ dataeditors:
 - stata19-be-i
 - stata19-be
 - stata19-base
-dynare:
-- dynare
-ghcr.io/sivacor:
-- julia1.10
-- julia1.11
-- julia1.13
-rocker:
-- r-base
-- r-devel
-- rstudio
-- ropensci
-- r-devel-san
-- drd
-- r-devel-ubsan-clang
-- shiny
-- r-apt
-- r-ver
-- tidyverse
-- verse
-- rstudio-stable
-- geospatial
-- binder
-- ml
-- drp
-- shiny-verse
-- r-rmd
-- cuda
-- tensorflow
-- tensorflow-gpu
-- ml-gpu
-- cuda-dev
-- gdal
-- r-parallel
-- r-ubuntu
-- ml-verse
-- r-rspm
-- r-bspm
-- r-edge
-- ci-4.0
-- vscode
-- r2u
-- r-basse
-- ml-spatial
-- rapids
-- cuda-spatial
-- r2u4ci
