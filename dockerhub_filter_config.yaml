@@ -27,14 +27,14 @@ software:
     sort_order: 6
 
 repositories:
-  - namespace: dataeditors
+  - namespace: sscng
     software:
       - Stata (older)
     filters:
       - repo_regex: '^stata1[5-7]$'
       - tag_regex: '^\d{4}-\d{2}-\d{2}$'
         keep_latest_n: 1
-  - namespace: dataeditors
+  - namespace: sscng
     software:
       - Stata
     filters:
@@ -44,7 +44,7 @@ repositories:
         # This build had issues
           - '2025-08-14'
         keep_latest_n: 4
-  - namespace: dataeditors
+  - namespace: sscng
     software:
       - Stata w Python
     filters:
