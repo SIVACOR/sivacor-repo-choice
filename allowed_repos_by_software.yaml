@@ -25,6 +25,7 @@ R:
   description: R programming language images
   repos:
     rocker/r-ver:
+    - 4.6.2
     - 4.6.1
     - 4.6.0
     - 4.5.3
@@ -44,6 +45,7 @@ R:
     - 4.2.1
     - 4.2.0
     rocker/tidyverse:
+    - 4.6.2
     - 4.6.1
     - 4.6.0
     - 4.5.3
@@ -148,15 +150,20 @@ Julia:
   description: Julia programming language images
   repos:
     ghcr.io/sivacor/julia1.10:
+    - 1.10.12-20261028
+    - 1.10.12-20261022
+    - 1.10.12-20261021
     - 1.10.12-20260919
-    - 1.10.12-20260916
     ghcr.io/sivacor/julia1.11:
-    - 1.11.9-20260919
-    - 1.11.9-20260916
+    - 1.11.9-20261029
+    - 1.11.9-20261028
+    - 1.11.9-20261022
+    - 1.11.9-20261021
     ghcr.io/sivacor/julia1.13:
+    - 1.13.3-20261028
+    - 1.13.2-20261022
+    - 1.13.2-20261021
     - 1.13.1-20260929
-    - 1.13.0-20260919
-    - 1.13.0-20260916
 Stata (older):
   description: Older versions of Stata software
   repos:
