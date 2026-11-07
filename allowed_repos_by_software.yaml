@@ -150,20 +150,20 @@ Julia:
   description: Julia programming language images
   repos:
     ghcr.io/sivacor/julia1.10:
+    - 1.10.13-20261106
+    - 1.10.13-20261103
     - 1.10.12-20261028
     - 1.10.12-20261022
-    - 1.10.12-20261021
-    - 1.10.12-20260919
     ghcr.io/sivacor/julia1.11:
+    - 1.11.9-20261106
     - 1.11.9-20261029
     - 1.11.9-20261028
     - 1.11.9-20261022
-    - 1.11.9-20261021
     ghcr.io/sivacor/julia1.13:
+    - 1.13.3-20261106
     - 1.13.3-20261028
     - 1.13.2-20261022
     - 1.13.2-20261021
-    - 1.13.1-20260929
 Stata (older):
   description: Older versions of Stata software
   repos:
